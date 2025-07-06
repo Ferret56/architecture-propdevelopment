@@ -1,0 +1,8 @@
+kubectl apply -f secrets-reader-role.yaml
+kubectl apply -f privilege-group.yaml
+
+kubectl apply -f resources-reader-role.yaml
+kubectl apply -f view-group.yaml
+
+kubectl apply -f cluster-updater-role.yaml
+kubectl apply -f admin-group.yaml

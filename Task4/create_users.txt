@@ -1,0 +1,6 @@
+kubectl create serviceaccount privilege-user-1
+kubectl create serviceaccount privilege-user-2
+kubectl create serviceaccount viewer-user-1
+kubectl create serviceaccount viewer-user-2
+kubectl create serviceaccount admin-user-1
+kubectl create serviceaccount admin-user-2
