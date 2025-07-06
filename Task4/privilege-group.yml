@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: privilege-group-binding
+subjects:
+  - kind: Group
+    name: privilege-group
+    apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: Role
+  name: secrets-reader-role
+  apiGroup: rbac.authorization.k8s.io

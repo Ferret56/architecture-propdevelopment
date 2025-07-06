@@ -1,0 +1,37 @@
+#!/bin/bash
+
+for user in "privilege-user-1" "privilege-user-2"; do
+  openssl req -newkey rsa:2048 -nodes -keyout ${user}.key \
+    -subj "/CN=${user}/O=privilege-group" | \
+    openssl x509 -req -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key \
+    -CAcreateserial -out ${user}.crt -days 365
+
+  kubectl config set-credentials ${user} \
+    --client-certificate=${user}.crt \
+    --client-key=${user}.key \
+    --embed-certs=true
+done
+
+for user in "viewer-user-1" "viewer-user-2"; do
+  openssl req -newkey rsa:2048 -nodes -keyout ${user}.key \
+    -subj "/CN=${user}/O=view-group" | \
+    openssl x509 -req -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key \
+    -CAcreateserial -out ${user}.crt -days 365
+
+  kubectl config set-credentials ${user} \
+    --client-certificate=${user}.crt \
+    --client-key=${user}.key \
+    --embed-certs=true
+done
+
+for user in "admin-user-1" "admin-user-2"; do
+  openssl req -newkey rsa:2048 -nodes -keyout ${user}.key \
+    -subj "/CN=${user}/O=admin-group" | \
+    openssl x509 -req -CA ~/.minikube/ca.crt -CAkey ~/.minikube/ca.key \
+    -CAcreateserial -out ${user}.crt -days 365
+
+  kubectl config set-credentials ${user} \
+    --client-certificate=${user}.crt \
+    --client-key=${user}.key \
+    --embed-certs=true
+done
